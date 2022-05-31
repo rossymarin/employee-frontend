@@ -3,10 +3,9 @@ import {useState, useEffect} from 'react'
 import { BiEdit } from 'react-icons/bi';
 import './Modal.css';
 import axios from 'axios'
-import { useParams } from 'react-router-dom';
 
 function ModalEmployee({data, funcion}) {
-  const URI = 'http://localhost:8000/employees'
+  const URI = 'http://localhost:8000/employees/'
     const [show, setShow] = useState(false);
     const [form, setForm] = useState({
       nomina:data.nomina,
@@ -20,10 +19,22 @@ function ModalEmployee({data, funcion}) {
       jubilado:data.jubilado,
       telefonop:data.telefonop,
       correop:data.correop,
-      foto:data.foto,
+      foto:data.foto, 
     });
 
-    const id = useParams()
+    const [nomina, setNomina] = useState('')
+    const [nombre, setNombre] = useState('')
+    const [puesto, setPuesto] = useState('')
+    const [ubicacion, setUbicacion] = useState('')
+    const [correo, setCorreo] = useState('')
+    const [telefono, setTelefono] = useState('')
+    const [extension, setExtension] = useState('')
+    const [status, setStatus] = useState('')
+    const [jubilado, setJubilado] = useState('')
+    const [correop, setCorreop] = useState('')
+    const [telefonop, setTelefonop] = useState('')
+    const [foto, setFoto] = useState('')
+    const id = data.id
   
     const handleClose = () => setShow(false);
     const handleShow = () => {
@@ -87,13 +98,23 @@ function ModalEmployee({data, funcion}) {
           foto: e.target.value
         })
       } 
-
     }
 
     const update = async (e) => {
       e.preventDefault()
       await axios.put(URI+id,{
-        ...form,
+        nomina: nomina,
+        nombre : nombre,
+        ubicacion: ubicacion,
+        extension : extension,
+        status : status,
+        jubilado : jubilado,
+        correo : correo,
+        telefono : telefono,
+        foto : foto,
+        correop : correop,
+        telefonop : telefonop,
+        puesto : puesto
       })
       funcion()
       handleClose()
@@ -105,23 +126,20 @@ function ModalEmployee({data, funcion}) {
 
     const getBlogById = async () => {
       const res = await axios.get(URI+id)
-      setForm({
-        ...form,
-        nomina: res.data.nomina,
-        nombre: res.data.nombre,
-        puesto: res.data.puesto,
-        ubicacion: res.data.ubicacion,
-        correo: res.data.correo,
-        telefono: res.data.telefono,
-        extension: res.data.extension,
-        status: res.data.status,
-        jubilado: res.data.jubilado,
-        correop: res.data.correop,
-        telefonop: res.data.telefonop,
-        foto: res.data.foto
-      })
-    }
-  
+        setNomina(res.data.nomina)
+        setNombre(res.data.nombre)
+        setPuesto(res.data.puesto)
+        setUbicacion(res.data.ubicacion)
+        setCorreo(res.data.correo)
+        setTelefono(res.data.telefono)
+        setExtension(res.data.extension)
+        setStatus(res.data.status)
+        setJubilado(res.data.jubilado)
+        setCorreop(res.data.correop)
+        setTelefonop(res.data.telefonop)
+        setFoto(res.data.foto)
+      }   
+    
     return (
       <>
         <Button variant="primary" onClick={handleShow} style={{marginRight: 10}}>
@@ -138,7 +156,7 @@ function ModalEmployee({data, funcion}) {
           </Modal.Header>
           <Modal.Body>
               <label>Nomina</label>
-              <input id="nomina" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={form.nomina}></input>
+              <input id="nomina" type="text" className="form-control" onChange={e=>setNomina(e.target.value)} value={form.nomina}></input>
               <label>Nombre</label>
               <input id="nombre" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={form.nombre}></input>
               <label>Puesto</label>

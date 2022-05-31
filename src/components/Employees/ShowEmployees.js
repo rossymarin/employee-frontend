@@ -5,6 +5,7 @@ import ModalDeleteEmployee from './ModalDeleteEmployee.js'
 import ModalCreateEmployee from './ModalCreateEmployee.js'
 import Card from '../Card/Card.tsx'
 import DataCard from '../DataCard/DataCard.js'
+import ModalImportEmployees from './ModalImportEmployees.js'
 
 const URI = 'http://localhost:8000/employees/'
 
@@ -20,7 +21,7 @@ const CompShowEmployees = () => {
 
     //filtrar
     const handleOnClick = (e) => {
-        let res = employees.filter(item => item.id == e.target.id)
+        let res = employees.filter(item => item.id === e.target.id)
         setEmploye(res[0])
         
     }
@@ -42,16 +43,16 @@ const CompShowEmployees = () => {
     }
 
     return(
-        <div className="container">
-            <div className="row" style={{width:'1400px'}}>
-                <div className="col-4 mt-2">
+        <div className="container" style={{overflow: 'hidden'}}>
+            <div className="row">
+                <div className="col-4">
                     <Card
                         margin={'12px'}
                         data={employee}
                         width={"89%"}
                         ml={'26%'}
                         padding={'3%'}
-                        width2={'170px'}
+                        width2={'180px'}
                         visibility={"none"}
                     />
                     <DataCard
@@ -59,7 +60,7 @@ const CompShowEmployees = () => {
                         margin={'15px'}
                     />
                 </div>
-                <div className="col-7 mt-2">
+                <div className="col-7">
                     <table className="table">
                         <thead className="thead-dark">
                             <tr>
@@ -92,8 +93,11 @@ const CompShowEmployees = () => {
                         </tbody>
                     </table>
                 </div>
-                <div className="col-1" style={{marginTop:'10px'}}>
+                <div className="col-1">
                     <ModalCreateEmployee
+                        funcion={getEmployees}
+                    />
+                    <ModalImportEmployees
                         funcion={getEmployees}
                     />
                 </div>
