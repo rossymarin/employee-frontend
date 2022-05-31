@@ -1,0 +1,11 @@
+.card{
+    width: 25rem;
+    background-color: rgba(238, 236, 236, 0.695);
+    border: 3px solid rgb(167, 166, 166);
+    border-radius: 35px !important;
+    margin: 10%;
+}
+
+.card-img-top {
+    padding: 10%;
+}

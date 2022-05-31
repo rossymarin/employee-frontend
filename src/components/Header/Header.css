@@ -1,0 +1,17 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+    background-color: rgba(228, 32, 41);
+    border-bottom: 5px solid rgb(163, 6, 6);
+    border-top: 5px solid rgb(131, 6, 6);
+}
+
+.header_logo {
+    object-fit: contain;
+    height: 60px;
+    margin: 1% 40% 1% 40%;
+}
+
+  
