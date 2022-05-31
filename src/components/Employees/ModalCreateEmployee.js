@@ -6,6 +6,7 @@ import axios from 'axios'
 
 function ModalCreateEmployee({funcion}) {
     const URI = 'http://localhost:8000/employees'
+    console.log("rossy")
 
     const [show, setShow] = useState(false);
     const [nomina, setNomina] = useState('')
