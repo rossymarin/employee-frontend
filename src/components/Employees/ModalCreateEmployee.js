@@ -29,22 +29,28 @@ function ModalCreateEmployee({funcion}) {
     //guardar
     const store = async (e) => {
       e.preventDefault()
-      await axios.post(URI, {
-        nomina: nomina, 
-        nombre: nombre, 
-        puesto: puesto, 
-        ubicacion: ubicacion, 
-        correo: correo,
-        telefono: telefono,
-        extension: extension,
-        status: status,
-        jubilado: jubilado,
-        correop: correop,
-        telefonop: telefonop,
-        foto: foto,
-      })
-      funcion()
-      handleClose()
+      console.log(nomina)
+      if(nomina.length!==0 && nombre.length!==0 && puesto.length!==0 && ubicacion.length!==0 && correo.length!==0 && telefono.length!==0 && extension.length!==0 && status.length!==0 && jubilado.length!==0 && correop.length!==0 && telefonop.length!==0 && foto.length!==0){ 
+        await axios.post(URI, {
+          nomina: nomina, 
+          nombre: nombre, 
+          puesto: puesto, 
+          ubicacion: ubicacion, 
+          correo: correo,
+          telefono: telefono,
+          extension: extension,
+          status: status,
+          jubilado: jubilado,
+          correop: correop,
+          telefonop: telefonop,
+          foto: foto,
+        })
+        funcion()
+        handleClose()
+      }else{
+        alert("Ningun campo debe estar vacio")
+      }
+     
     }
   
     return (
@@ -64,7 +70,7 @@ function ModalCreateEmployee({funcion}) {
             </Modal.Header>
             <Modal.Body>
               <label>Nomina</label>
-              <input id="nomina" type="text" className="form-control" value={nomina} onChange={(e)=>setNomina(e.target.value)}></input>
+              <input id="nomina" type="text" className="form-control" value={nomina} onChange={(e)=>setNomina(e.target.value)} required></input>
               <label>Nombre</label>
               <input id="nombre" type="text" className="form-control" value={nombre} onChange={(e)=>setNombre(e.target.value)}></input>
               <label>Puesto</label>
