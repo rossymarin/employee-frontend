@@ -19,10 +19,10 @@ function ModalEmployee({data, funcion}) {
       jubilado:data.jubilado,
       telefonop:data.telefonop,
       correop:data.correop,
-      foto:data.foto, 
+      foto:data.foto,
     });
 
-    const [nomina, setNomina] = useState('')
+    let [nomina, setNomina] = useState('')
     const [nombre, setNombre] = useState('')
     const [puesto, setPuesto] = useState('')
     const [ubicacion, setUbicacion] = useState('')
@@ -41,80 +41,53 @@ function ModalEmployee({data, funcion}) {
       setShow(true)
     };
     const handleOnChange = (e) => {
+      console.log(e.target.id)
       e.preventDefault();
       if (e.target.id === "nomina") {
-        setForm({
-          ...form,
-          nomina: e.target.value
-        })
+        setNomina(e.target.value)
+        nomina=e.target.value
       }else if (e.target.id === "nombre") {
-          setForm({
-            ...form,
-            nombre: e.target.value
-          })
+        setNombre(e.target.value)
       }else if (e.target.id === "puesto") {
-        setForm({
-          ...form,
-          puesto: e.target.value
-        })
+        setPuesto(e.target.value)
       }else if (e.target.id === "ubicacion") {
-        setForm({
-          ...form,
-          ubicacion: e.target.value
-        })
+        setUbicacion(e.target.value)
       }else if (e.target.id === "correo") {
-        setForm({
-          ...form,
-          correo: e.target.value
-        })
+        setCorreo(e.target.value)
       }else if (e.target.id === "telefono") {
-        setForm({
-          ...form,
-          telefono: e.target.value
-        })
+        setTelefono(e.target.value)
       }else if (e.target.id === "extension") {
-        setForm({
-          ...form,
-          extension: e.target.value
-        })
+        setExtension(e.target.value)
       }else if (e.target.id === "jubilado") {
-        setForm({
-          ...form,
-          jubilado: e.target.value
-        })
+        setJubilado(e.target.value)
+      }else if (e.target.id === "status") {
+        setStatus(e.target.value)
       }else if (e.target.id === "correop") {
-        setForm({
-          ...form,
-          correop: e.target.value
-        })
+        setCorreop(e.target.value)
       }else if (e.target.id === "telefonop") {
-        setForm({
-          ...form,
-          telefonop: e.target.value
-        })
+        setTelefonop(e.target.value)
       }else if (e.target.id === "foto") {
-        setForm({
-          ...form,
-          foto: e.target.value
-        })
+        setFoto(e.target.value)
       } 
+
     }
 
     const update = async (e) => {
       e.preventDefault()
+      console.log(nombre)
       await axios.put(URI+id,{
         nomina: nomina,
-        nombre : nombre,
+        nombre: nombre,
         ubicacion: ubicacion,
-        extension : extension,
-        status : status,
-        jubilado : jubilado,
-        correo : correo,
-        telefono : telefono,
-        foto : foto,
-        correop : correop,
-        telefonop : telefonop,
-        puesto : puesto
+        extension: extension,
+        status: status,
+        jubilado: jubilado,
+        correo: correo,
+        telefono: telefono,
+        foto: foto,
+        correop: correop,
+        telefonop: telefonop,
+        puesto: puesto
       })
       funcion()
       handleClose()
@@ -138,50 +111,51 @@ function ModalEmployee({data, funcion}) {
         setCorreop(res.data.correop)
         setTelefonop(res.data.telefonop)
         setFoto(res.data.foto)
-      }   
-    
+      }  
+  
     return (
       <>
-        <Button variant="primary" onClick={handleShow} style={{marginRight: 10}}>
+        <Button variant="primary" onClick={handleShow} style={{marginRight: 0}}>
             <BiEdit/>
         </Button>
   
         <Modal
           show={show}
           onHide={handleClose}
-          scrollable={"true"}
+          scrollable={true}
         >        
           <Modal.Header closeButton>
             <Modal.Title>Editar Empleado</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body 
+            >
               <label>Nomina</label>
-              <input id="nomina" type="text" className="form-control" onChange={e=>setNomina(e.target.value)} value={form.nomina}></input>
+              <input id="nomina" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={nomina}></input>
               <label>Nombre</label>
-              <input id="nombre" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={form.nombre}></input>
+              <input id="nombre" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={nombre}></input>
               <label>Puesto</label>
-              <input id="puesto" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={form.puesto}></input>
+              <input id="puesto" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={puesto}></input>
               <label>Ubicación</label>
-              <input id="ubicacion" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={form.ubicacion}></input>
+              <input id="ubicacion" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={ubicacion}></input>
               <label>Email</label>
-              <input id="correo" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={form.correo}></input>
+              <input id="correo" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={correo}></input>
               <label>Telefono</label>
-              <input id="telefono" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={form.telefono}></input>
+              <input id="telefono" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={telefono}></input>
               <label>Extension</label>
-              <input id="extension" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={form.extension}></input>
+              <input id="extension" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={extension}></input>
               <label>Status</label>
-              <input id="status" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={form.status}></input>
+              <input id="status" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={status}></input>
               <label>Jubilado</label>
-              <input id="jubilado" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={form.jubilado}></input>
+              <input id="jubilado" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={jubilado}></input>
               <label>Email Personal</label>
-              <input id="correop" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={form.correop}></input>
+              <input id="correop" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={correop}></input>
               <label>Telefono Personal</label>
-              <input id="telefonop" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={form.telefonop}></input>
+              <input id="telefonop" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={telefonop}></input>
               <label>Foto</label>
-              <input id="foto" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={form.foto}></input> 
+              <input id="foto" type="text" className="form-control" onChange={e=>handleOnChange(e)} value={foto}></input> 
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>Cancelar</Button>
+            <Button variant="secondary" onClick={handleClose}>Regresar</Button>
             <Button variant="primary" onClick={update}>Guardar Cambios</Button>
           </Modal.Footer>
         </Modal>

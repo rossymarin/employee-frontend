@@ -6,7 +6,6 @@ import axios from 'axios'
 
 function ModalCreateEmployee({funcion}) {
     const URI = 'http://localhost:8000/employees'
-    console.log("rossy")
 
     const [show, setShow] = useState(false);
     const [nomina, setNomina] = useState('')
@@ -56,7 +55,7 @@ function ModalCreateEmployee({funcion}) {
   
     return (
       <>
-        <Button variant="primary" onClick={handleShow} style={{marginRight: 10}}>
+        <Button variant="primary" onClick={handleShow} style={{marginRight: 10, width: 50, height: 50}}>
             <AiOutlineUserAdd/>
         </Button>
 

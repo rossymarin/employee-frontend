@@ -6,6 +6,7 @@ import ModalCreateEmployee from './ModalCreateEmployee.js'
 import Card from '../Card/Card.tsx'
 import DataCard from '../DataCard/DataCard.js'
 import ModalImportEmployees from './ModalImportEmployees.js'
+import './Modal.css';
 
 const URI = 'http://localhost:8000/employees/'
 
@@ -21,7 +22,9 @@ const CompShowEmployees = () => {
 
     //filtrar
     const handleOnClick = (e) => {
-        let res = employees.filter(item => item.id === e.target.id)
+        let res = employees.filter(item => item.id == e.target.id)
+        console.log(e.target.id)
+        console.log(employees)
         setEmploye(res[0])
         
     }
@@ -61,7 +64,7 @@ const CompShowEmployees = () => {
                     />
                 </div>
                 <div className="col-7">
-                    <table className="table">
+                    <table className="table table-wrapper">
                         <thead className="thead-dark">
                             <tr>
                                 <th>Nomina</th>
@@ -93,13 +96,17 @@ const CompShowEmployees = () => {
                         </tbody>
                     </table>
                 </div>
-                <div className="col-1">
-                    <ModalCreateEmployee
-                        funcion={getEmployees}
-                    />
-                    <ModalImportEmployees
-                        funcion={getEmployees}
-                    />
+                <div className="col-1 mt-2">
+                    <div className="mt-2" style={{width: '100px'}}>
+                        <ModalCreateEmployee
+                            funcion={getEmployees}
+                        />
+                    </div>
+                    <div className="mt-2">
+                        <ModalImportEmployees
+                            funcion={getEmployees}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

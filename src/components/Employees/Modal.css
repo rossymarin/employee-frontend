@@ -1,5 +1,19 @@
 .table-wrapper {
-    max-height: 100px;
+    margin-top: 20px;
+    max-height: 600px;
     overflow: auto;
     display:inline-block;
+}
+
+table,tr,th,td{
+    border:1px solid #8f2b2b;
+    border-collapse:collapse;
+}
+
+thead tr th { 
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: rgba(228, 32, 41) !important;
+    color: #fff !important;
 }
